@@ -1,0 +1,147 @@
+CORREÇÃO CIRÚRGICA — SCALPER BANDS 1.996
+
+Telemetria, Magic Numbers e isolamento operacional
+
+Realize uma correção estritamente cirúrgica na Scalper Bands 1.996, preservando integralmente sua arquitetura estratégica.
+
+A Scalper 1.995 reconstruída é outra estratégia e deverá permanecer completamente intacta.
+
+1. Correção do arquivo de telemetria
+
+A auditoria identificou que "OMReset()" constrói o nome do arquivo "ScalperObjective_v1_...csv" utilizando "(string)TimeLocal()".
+
+Essa conversão pode gerar caracteres ":" incompatíveis com nomes de arquivos Windows, fazendo "FileOpen()" falhar e impedindo a gravação dos diagnósticos da ObjectiveMatrix.
+
+Correções obrigatórias:
+
+1. Substituir o timestamp por um formato seguro para nomes de arquivos.
+2. Verificar imediatamente o retorno de "FileOpen()".
+3. Quando houver falha, registrar no Journal o nome solicitado e o código retornado por "GetLastError()".
+4. Garantir que o erro de telemetria não modifique decisões estratégicas, posições, ordens ou obrigações financeiras.
+5. Preservar os eventos e campos existentes dos registros, especialmente "ENGINE_STATUS" e "ENGINE_TRANSITION".
+
+2. Alteração dos Magic Numbers — obrigatória
+
+Modificar exclusivamente os valores padrão da Scalper Bands 1.996:
+
+Configuração atual:
+
+input int Inp_Magic_WIN = 60001;
+input int Inp_Magic_WDO = 60002;
+
+Nova configuração:
+
+input int Inp_Magic_WIN = 70001;
+input int Inp_Magic_WDO = 70002;
+
+A Scalper 1.995 reconstruída deverá continuar utilizando:
+
+- WIN: "60001"
+- WDO: "60002"
+
+Garantir que os novos números sejam corretamente utilizados em todas as operações da 1.996, incluindo identificação de ordens, posições, histórico, reconciliação, bloqueios por instância e filtros de propriedade financeira.
+
+Não alterar nenhum outro parâmetro estratégico.
+
+3. Auditoria de isolamento entre os robôs
+
+Investigar se a Scalper Bands 1.996 e a Scalper 1.995 reconstruída ainda compartilham identificadores persistentes capazes de provocar conflitos.
+
+Verificar especificamente:
+
+- Magic Numbers efetivos.
+- Instance locks.
+- Identificação de ordens e posições.
+- Journals financeiros.
+- Arquivos de persistência e recuperação.
+- Nomes de arquivos CSV.
+- Contabilidade de operações.
+- Reconciliação de requests, orders e deals.
+- Comportamento em contas HEDGING, NETTING e EXCHANGE.
+
+Importante: a mudança dos Magic Numbers não significa isolamento automático dos estados financeiros.
+
+Se houver compartilhamento inseguro de arquivos, journals ou identificadores, apresentar o caminho, a evidência e a consequência exata.
+
+Corrigir apenas colisões comprovadas que possam ser isoladas sem comprometer recuperação financeira ou obrigações existentes.
+
+Não renomear indiscriminadamente os journals financeiros, não apagar arquivos antigos e não migrar posições ou obrigações pendentes de "60001/60002" para "70001/70002" sem um protocolo seguro e explicitamente justificado.
+
+Se a separação completa exigir alterações fora do escopo cirúrgico, documentar o impedimento e não presumir segurança.
+
+4. Verificação de possíveis bloqueios da 1.996
+
+Sem modificar os filtros, verificar se existem bloqueios estruturais que impeçam a sequência:
+
+"BANDS_READY → M1_CLOSED → SIGNAL_DETECTED → ARMED"
+
+Investigar:
+
+1. Reconhecimento da sessão da corretora.
+2. Sincronização do histórico de negócios.
+3. Disponibilidade das bandas e da Weis Wave.
+4. Classificação ABS/CONT.
+5. Elegibilidade pela localização na VWAP Bands.
+6. Divergência entre fechamento M1 e preço do negócio.
+7. Bloqueios por posição, contabilidade ou instância.
+
+Para cada hipótese, registrar o trecho responsável, a condição necessária, a evidência obtida e se o comportamento representa erro ou bloqueio intencional.
+
+Não relaxar filtros para gerar mais operações.
+
+5. Preservação estratégica obrigatória
+
+É proibido modificar:
+
+- Construção da Weis Wave.
+- Esforço, eficiência, rejeição e deslocamento.
+- Classificação ABS/CONT.
+- VWAP Bands e cálculo do sigma intradiário.
+- Critérios de elegibilidade e confirmação.
+- Gatilhos, breakout, overshoot e timeout.
+- FAR.
+- SL/TP e break-even.
+- Proteção progressiva.
+- Horários operacionais.
+- Limites de risco.
+- Sizing.
+- Regras de execução e reconciliação financeira.
+
+Exceção expressamente autorizada: alterar os Magic Numbers padrão da 1.996 para "70001/70002" e corrigir exclusivamente os identificadores necessários ao isolamento seguro e comprovado.
+
+Não alterar a estratégia nem o código da Scalper 1.995.
+
+6. Build, testes e entrega
+
+Corrigir os arquivos de origem do projeto.
+
+Regenerar o arquivo monolítico utilizando:
+
+"python3 tools/build_consolidated.py"
+
+Executar testes de:
+
+1. Nomes de arquivos válidos no Windows.
+2. Abertura e falha controlada do CSV.
+3. Preservação dos eventos de telemetria.
+4. Utilização efetiva dos Magic Numbers "70001/70002".
+5. Isolamento de arquivos e journals por identidade.
+6. Ausência de apropriação indevida de posições antigas.
+7. Compatibilidade dos fluxos ABS/CONT.
+8. Equivalência estratégica antes/depois.
+9. Integridade dos mecanismos financeiros.
+10. Consistência da versão monolítica com os fontes.
+
+Entregar:
+
+- Arquivo ".mq5" monolítico completo e atualizado.
+- Diff exato.
+- Relatório dos testes.
+- Relatório de isolamento entre 1.995 e 1.996.
+- Lista de eventuais limitações operacionais restantes.
+
+Preservar a versão anterior para comparação.
+
+Não declarar compilação MetaEditor sem evidência de compilação nativa.
+
+Objetivo final: Scalper Bands 1.996 com telemetria funcional, Magic Numbers exclusivos "70001/70002" e isolamento financeiro auditado, sem alterar a inteligência estratégica nem a Scalper 1.995 reconstruída.
